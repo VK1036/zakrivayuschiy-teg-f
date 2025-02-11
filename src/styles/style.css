@@ -11,6 +11,429 @@
 */
 
 .page {
-  min-inline-size: 320px;
-  min-block-size: 100dvb;
+  min-inline-size: 375px;
+  min-block-size: 100vh;
+  font-family: var(--main-font, 'Inter Variable', sans-serif);
+  font-weight: var(--text-font-weight, 400);
+  background-color: var(--bg-color, #fff);
+  color: var(--accent-color, #000);
+}
+
+.header {
+  background-color: var(--bg-color, #fff);
+  min-block-size: 327px;
+  margin: 100px 0;
+  border: solid 2px var(--accent-color, #000);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  font-family: var(--accent-font, 'Press Start 2P', sans-serif);
+  font-weight: var(--text-font-weight, 400);
+  text-transform: uppercase;
+}
+
+.header__title {
+  font-size: clamp(3.0625rem, 2.7104rem + 1.5023vw, 4.0625rem);
+  margin: 0;
+}
+
+.header__description {
+  font-size: clamp(0.875rem, 0.6769rem + 0.8451vw, 1.4375rem);
+}
+
+.content__section {
+  min-inline-size: 375px;
+  margin: 0 0 52px;
+  border: solid 2px var(--accent-color, #000);
+  background-color: var(--bg-color, #fff);
+}
+
+.content__title {
+  font-weight: var(--heading-font-weight);
+  font-size: 18px;
+  padding: 5px 10px;
+  line-height: 21px;
+  border-bottom: 2px solid var(--accent-color, #000);
+}
+
+.content__image-contaier {
+  max-block-size: 373px;
+  position: relative;
+  border-bottom: 2px solid var(--accent-color, #000);
+}
+
+.content__image-text {
+  position: absolute;
+  inset-inline-end: 13px;
+  inset-block-start: 25px;
+  font-family: var(--accent-font, 'Press Start 2P', sans-serif);
+  font-size: 14px;
+  color: var(--accent-color, #000);
+  opacity: 0.5;
+  mix-blend-mode: hard-light;
+  -webkit-text-stroke: 1px var(--bg-color, #fff); /* обводка текста */
+  text-shadow:
+    -1px 0 var(--bg-color, #fff),
+    0 1px var(--bg-color, #fff),
+    1px 0 var(--bg-color, #fff),
+    0 -1px var(--bg-color, #fff);
+}
+
+@supports (
+  (text-stroke: 1px var(--bg-color, #fff)) or
+    (-webkit-text-stroke: 1px var(--bg-color, #fff))
+) {
+
+  .content__image-text {
+    -webkit-text-stroke: 1px var(--bg-color, #fff);
+    text-shadow: none;
+  }
+}
+
+.content__image {
+  display: block;
+  inline-size: 100%;
+  object-fit: cover;
+  aspect-ratio: 1/1;
+}
+
+.filter__gray {
+  filter: grayscale(0.8);
+}
+
+.filter__bright {
+  filter: brightness(200%);
+}
+
+.filter__hue-rotate {
+  filter: hue-rotate(-90deg);
+}
+
+.filter__invert {
+  filter: invert(0.7);
+}
+
+.filter__sepia {
+  filter: sepia(80%);
+}
+
+.filter__blur {
+  filter: blur(2rem);
+}
+
+.filter__contrast {
+  filter: contrast(120%);
+}
+
+.content__text {
+  padding: 25px;
+  font-size: 18px;
+  line-height: 21px;
+}
+
+.content__paragraph:not(:last-of-type) {
+  margin-block-end: 27px;
+}
+
+.content__button {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 6px;
+  margin-inline-end: 25px;
+  margin-block-end: 23px;
+  font-size: 14px;
+}
+
+/* сердечко */
+
+.card__icon-button {
+  cursor: pointer;
+  border: none;
+  width: 39px;
+  height: 36px;
+  padding: 0;
+  /* margin-block-start: 2px; */
+  background-color: var(--bg-color, #fff);
+}
+
+.card__icon-button:focus {
+  outline: none;
+}
+
+.like-icon {
+
+  .contour {
+    fill: var(--contour-color, #000);
+  }
+
+  .main-body {
+    fill: none;
+  }
+
+  .core {
+    fill: none;
+  }
+
+  .sparks {
+    opacity: 0;
+    /* fill: var(--like-color, #FF0000); */
+  }
+}
+
+.like-icon:hover {
+
+  .core {
+    fill: var(--accent-color, #000);
+    transition: fill 0.3s linear;
+  }
+
+  .main-body {
+    fill: var(--accent-color, #000);
+    transition: fill 0.3 0.05 linear;
+  }
+}
+
+.like-icon:active {
+
+  .core {
+    fill: var(--like-color, #f00);
+    transition: fill 0.3s linear;
+  }
+
+  .main-body {
+    fill: var(--like-color, #f00);
+    transition: fill 0.3 0.05 linear;
+  }
+}
+
+.like-icon.is-liked {
+
+  .core {
+    fill: var(--like-color, #f00);
+    transition: fill 0.3s linear;
+  }
+
+  .main-body {
+    fill: var(--like-color, #f00);
+    transition: fill 0.3 0.05 linear;
+  }
+
+  .contour {
+    fill: var(--like-color, #f00);
+    transition: fill 0.3s 0.06s linear;
+  }
+
+  .heart {
+    /* stylelint-disable-next-line no-unknown-animations */
+    animation: heart-scale 0.3s 0.1s ease-in both;
+  }
+
+  .sparks {
+    /* stylelint-disable-next-line no-unknown-animations */
+    animation: sparks 0.3s 0.3s ease-in both;
+  }
+}
+
+.like-icon:focus-visible {
+  outline: 2px solid var(--accent-color);
+  transition: outline 0.3s ease;
+}
+
+.card__like-button {
+  position: relative;
+  padding: 5px 0 0;
+  /* margin-top: -8px; */
+  inline-size: 130px;
+  block-size: 40px;
+  background-color: transparent;
+  border: 2px solid var(--accent-color, #000);
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.card__like-button::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-color: var(--accent-color, #000);
+  transition: transform 0.5s ease-in-out;
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+.card__like-button:focus {
+  outline: none;
+}
+
+.card__like-button:focus-visible {
+  outline: none;
+  box-shadow: 2px 2px 0 0 var(--accent-color, #000);
+  transition: box-shadow 0.3s ease;
+}
+
+.card__like-button:hover::before {
+  transform: scaleX(1);
+}
+
+.button__text {
+  position: relative;
+  color: var(--bg-color, #fff);
+  font-family: var(--accent-font, 'Press Start 2P', sans-serif);
+  mix-blend-mode: difference;
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  margin: 0 auto 102px;
+  max-inline-size: 314px;
+  font-size: 14px;
+}
+
+.floppy {
+  position: relative;
+  z-index: 1;
+  inline-size: 28px;
+  block-size: 28px;
+  color: var(--bg-color, #fff);
+  mix-blend-mode: difference;
+}
+
+.footer__button {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 15px 0;
+  inline-size: 306px;
+  font-size: 14px;
+  block-size: 84px;
+  background-color: var(--bg-color);
+  cursor: pointer;
+  border: 2px solid var(--accent-color, #000);
+  overflow: hidden;
+}
+
+.footer__button:focus {
+  outline: none;
+}
+
+.footer__button:focus-visible {
+  outline: none;
+  box-shadow: 2px 2px 0 0 var(--accent-color);
+  transition: box-shadow 0.3s ease;
+}
+
+.footer__button::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-color: var(--accent-color, #000);
+  transition: transform 0.5s ease-in-out;
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+.footer__button:hover::before {
+  transform: scaleX(1);
+}
+
+.dialog {
+  padding: 28px 40px;
+  position: fixed;
+  inset: 0;
+  max-inline-size: clamp(21.3125rem, 21.3125rem + 0vw, 21.3125rem);
+  block-size: 191px;
+  font-family: var(--accent-font), sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 21px;
+  text-transform: uppercase;
+  background-color: var(--bg-color);
+  border: 2px solid var(--accent-color, #000);
+  transition: opacity 0.3s ease-in-out;
+}
+
+.dialog__form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-inline-size: clamp(16.0625rem, 15.2702rem + 3.3803vw, 18.3125rem);
+  block-size: 63px;
+  gap: 20px;
+}
+
+.dialog__image {
+  align-self: center;
+  justify-self: center;
+  min-inline-size: 39px;
+  block-size: 39px;
+}
+
+.dialog__text {
+  justify-self: center;
+  align-self: center;
+}
+
+.dialog__button {
+  margin: 27px 0 0;
+  padding: 0;
+  inline-size: 257px;
+  block-size: 38px;
+  text-transform: uppercase;
+  background-color: var(--bg-color);
+  cursor: pointer;
+  border: 2px solid var(--accent-color, #000);
+}
+
+dialog:not([open]) {
+  pointer-events: none;
+  opacity: 0;
+}
+
+dialog::backdrop {
+  background-color: rgb(0 0 0 / 0.75);
+}
+
+@media (width > 376px) {
+
+  .page {
+    min-inline-size: 376px;
+    max-inline-size: 696px;
+    margin: 0 auto;
+  }
+
+  .header {
+    block-size: 368px;
+  }
+
+  .content__image-contaier {
+    max-block-size: 696px;
+  }
+
+  .footer {
+    max-inline-size: 340px;
+  }
+
+  .footer__button {
+    flex-direction: row;
+    justify-content: center;
+    inline-size: 335px;
+    block-size: 51px;
+  }
+
+  .floppy {
+    inline-size: 21px;
+    block-size: 21px;
+  }
+
+  .dialog {
+    max-inline-size: 357px;
+  }
 }
